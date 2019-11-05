@@ -1,0 +1,17 @@
+<P>
+{% if request.user.is_authenticated %}
+    You're authenticate yet...
+    Welcome {{ request.user.first_name }} {{ request.user.last_name }}
+    <a href="{% url 'LogOut' %}"><input type="button" value="LogOut"></a>
+
+{% else %}
+    You're not authenticate yet...
+    <a href="{% url 'LogIn' %}"><input type="button" value="LogIn"></a>
+    or...
+    <a href="{% url 'SignIn' %}"><input type="button" value="SignIn"></a>
+{% endif %}
+</P>
+
+{% block content %}
+
+{% endblock %}

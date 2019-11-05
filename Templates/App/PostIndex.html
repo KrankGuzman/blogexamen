@@ -1,0 +1,21 @@
+{% extends 'Shared/Base.html' %}
+
+{% block content %}
+{% include 'Shared/Bar.html' %}
+{% for post in posts %}
+    <BR>
+    <BR>
+    {{ post.title }}
+    <BR>
+    {% for record in records %}
+        {% if record.post.pk == post.pk and record.action == "CREATE" %}
+        By: {{ record.user }} on {{ record.date|date:'j F Y H:i' }}
+        {% endif %}
+    {% endfor %}
+
+    <BR>
+    <A HREF="{% url 'ReadPost' post_pk=post.pk %}">
+        <INPUT TYPE="BUTTON" VALUE="Read Post">
+    </A>
+{% endfor %}
+{% endblock %}

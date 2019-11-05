@@ -1,0 +1,46 @@
+{% extends 'Shared/Base.html' %}
+
+{% block content %}
+{% include 'Shared/Bar.html' %}
+<BR>
+{{ post.title }}
+<BR>
+{{ post.text }}
+<BR>
+By:
+{{ post.record_create.user.first_name }}
+{{ post.record_create.user.last_name }}
+on
+{{ post.record_create.date|date:'j F Y H:i'  }}
+<BR>
+    {% if post.record_create.user == request.user %}
+        <input type="button" value="Edit">
+        <A href="#"><input type="button" value="Delete"></A>
+    {% endif %}
+<BR>
+{% for comment in post.comments %}
+    <BR>
+    {{ comment.text }}
+    {{ comment.record_create.us}}
+    <BR>
+    By:
+    {{ comment.record_create.user.first_name }}
+    {{ comment.record_create.user.last_name }}
+    on
+    {{ comment.record_create.date|date:'j F Y H:i'  }}
+    <BR>
+    {% if comment.record_create.user == request.user %}
+        <input type="button" value="Edit">
+        <A href="{% url 'DeletePostComment' post_comment_pk=comment.pk %}"><input type="button" value="Delete"></A>
+    {% endif %}
+    <BR>
+{% endfor %}
+<BR>
+
+<FORM METHOD="POST">
+    {% csrf_token %}
+    <input type="hidden" name="post_pk" value="{{ post.pk }}">
+    {{ post_comment_form.as_p }}
+    <INPUT TYPE="SUBMIT">
+</FORM>
+{% endblock %}

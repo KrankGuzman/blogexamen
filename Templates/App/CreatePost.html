@@ -1,0 +1,12 @@
+{% extends 'Shared/Base.html' %}
+
+{% block content %}
+{% include 'Shared/Bar.html' %}
+
+<FORM METHOD="POST">
+    {% csrf_token %}
+    {{ post_form.as_p }}
+    <INPUT TYPE="SUBMIT">
+</FORM>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+<FORM METHOD="POST">
+    {% csrf_token %}
+    {{ sign_in_form.as_p }}
+    <INPUT TYPE="SUBMIT">
+</FORM>
